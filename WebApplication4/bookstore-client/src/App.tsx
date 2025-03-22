@@ -8,6 +8,7 @@ interface Book {
   publisher: string;
   isbn: string;
   category: string;
+  classification: string;
   pageCount: number;
   price: number;
 }
@@ -21,8 +22,8 @@ function App() {
 
   const fetchBooks = useCallback(async () => {
     try {
-      // Note: Sending the query parameters expected by the controller.
-      const response = await axios.get('http://localhost:5299/api/books', {
+      // Use a relative URL since the API is now served from the same origin
+      const response = await axios.get('/api/books', {
         params: { page, pageSize, sortField, sortOrder: 'asc' },
       });
       setBooks(response.data.books);
@@ -56,36 +57,44 @@ function App() {
             <option value={10}>10</option>
             <option value={20}>20</option>
           </select>
-          <label className="ml-3">Sort by: </label>
+          <label style={{ marginLeft: '30px' }}>Sort by: </label>
           <select value={sortField} onChange={(e) => setSortField(e.target.value)}>
             <option value="Title">Title</option>
             <option value="Author">Author</option>
+            <option value="Publisher">Publisher</option>
+            <option value="ISBN">ISBN</option>
+            <option value="Category">Category</option>
+            <option value="Classification">Classification</option>
+            <option value="Pages">Pages</option>
+            <option value="Price">Price</option>
           </select>
         </div>
 
         {/* Books Table */}
-        <table className="table table-striped">
+        <table className="table table-striped" style={{ tableLayout: 'fixed', width: '100%' }}>
           <thead>
           <tr>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Publisher</th>
-            <th>ISBN</th>
-            <th>Category</th>
-            <th>Pages</th>
-            <th>Price</th>
+            <th style={{ width: '15%' }}>Title</th>
+            <th style={{ width: '15%' }}>Author</th>
+            <th style={{ width: '15%' }}>Publisher</th>
+            <th style={{ width: '15%' }}>ISBN</th>
+            <th style={{ width: '10%' }}>Category</th>
+            <th style={{ width: '10%' }}>Classification</th>
+            <th style={{ width: '10%', textAlign: 'right' }}>Pages</th>
+            <th style={{ width: '10%', textAlign: 'right' }}>Price</th>
           </tr>
           </thead>
           <tbody>
           {books.map((book) => (
               <tr key={book.bookId}>
-                <td>{book.title}</td>
-                <td>{book.author}</td>
-                <td>{book.publisher}</td>
-                <td>{book.isbn}</td>
-                <td>{book.category}</td>
-                <td>{book.pageCount}</td>
-                <td>${book.price}</td>
+                <td style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{book.title}</td>
+                <td style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{book.author}</td>
+                <td style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{book.publisher}</td>
+                <td style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{book.isbn}</td>
+                <td style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{book.category}</td>
+                <td style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{book.classification}</td>
+                <td style={{ textAlign: 'right' }}>{book.pageCount}</td>
+                <td style={{ textAlign: 'right' }}>${book.price}</td>
               </tr>
           ))}
           </tbody>

@@ -226,10 +226,6 @@
 /Users/zackmcdougal/RiderProjects/WebApplication4/WebApplication4/bin/Debug/net9.0/package.json
 /Users/zackmcdougal/RiderProjects/WebApplication4 2/WebApplication4/bin/Debug/net9.0/appsettings.Development.json
 /Users/zackmcdougal/RiderProjects/WebApplication4 2/WebApplication4/bin/Debug/net9.0/appsettings.json
-/Users/zackmcdougal/RiderProjects/WebApplication4 2/WebApplication4/bin/Debug/net9.0/bookstore-client/package-lock.json
-/Users/zackmcdougal/RiderProjects/WebApplication4 2/WebApplication4/bin/Debug/net9.0/bookstore-client/package.json
-/Users/zackmcdougal/RiderProjects/WebApplication4 2/WebApplication4/bin/Debug/net9.0/bookstore-client/public/manifest.json
-/Users/zackmcdougal/RiderProjects/WebApplication4 2/WebApplication4/bin/Debug/net9.0/bookstore-client/tsconfig.json
 /Users/zackmcdougal/RiderProjects/WebApplication4 2/WebApplication4/bin/Debug/net9.0/package-lock.json
 /Users/zackmcdougal/RiderProjects/WebApplication4 2/WebApplication4/bin/Debug/net9.0/package.json
 /Users/zackmcdougal/RiderProjects/WebApplication4 2/WebApplication4/bin/Debug/net9.0/WebApplication4.staticwebassets.runtime.json
@@ -450,3 +446,8 @@
 /Users/zackmcdougal/RiderProjects/WebApplication4 2/WebApplication4/obj/Debug/net9.0/WebApplication4.pdb
 /Users/zackmcdougal/RiderProjects/WebApplication4 2/WebApplication4/obj/Debug/net9.0/WebApplication4.genruntimeconfig.cache
 /Users/zackmcdougal/RiderProjects/WebApplication4 2/WebApplication4/obj/Debug/net9.0/ref/WebApplication4.dll
+/Users/zackmcdougal/RiderProjects/WebApplication4 2/WebApplication4/obj/Debug/net9.0/WebApplication4.sourcelink.json
+/Users/zackmcdougal/RiderProjects/WebApplication4 2/WebApplication4/bin/Debug/net9.0/Microsoft.AspNetCore.SpaServices.Extensions.dll
+/Users/zackmcdougal/RiderProjects/WebApplication4 2/WebApplication4/bin/Debug/net9.0/Microsoft.Extensions.FileProviders.Abstractions.dll
+/Users/zackmcdougal/RiderProjects/WebApplication4 2/WebApplication4/bin/Debug/net9.0/Microsoft.Extensions.FileProviders.Physical.dll
+/Users/zackmcdougal/RiderProjects/WebApplication4 2/WebApplication4/bin/Debug/net9.0/Microsoft.Extensions.FileSystemGlobbing.dll

@@ -30,6 +30,10 @@ namespace WebApplication4.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Classification")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("ISBN")
                         .IsRequired()
                         .HasColumnType("TEXT");
