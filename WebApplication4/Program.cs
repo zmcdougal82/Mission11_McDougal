@@ -1,5 +1,8 @@
 using WebApplication4.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,15 +24,25 @@ builder.Services.AddCors(options =>
     });
 });
 
+// Add SPA static files
+builder.Services.AddSpaStaticFiles(configuration =>
+{
+    configuration.RootPath = "bookstore-client/build";
+});
+
 var app = builder.Build();
 
 // Enable CORS
 app.UseCors("AllowReactApp");
 
+// Enable static files
+app.UseStaticFiles();
+app.UseSpaStaticFiles();
+
 // Map controller routes
 app.MapControllers();
 
-// Seed the database with sample data if it's empty
+// Ensure database is created
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
@@ -37,67 +50,41 @@ using (var scope = app.Services.CreateScope())
     
     // Ensure database is created
     context.Database.EnsureCreated();
-    
-    // Check if there are any books
-    if (!context.Books.Any())
-    {
-        // Add sample books
-        context.Books.AddRange(
-            new WebApplication4.Models.Book
-            {
-                Title = "The Great Gatsby",
-                Author = "F. Scott Fitzgerald",
-                Publisher = "Scribner",
-                ISBN = "978-0743273565",
-                Category = "Fiction",
-                PageCount = 180,
-                Price = 12.99m
-            },
-            new WebApplication4.Models.Book
-            {
-                Title = "To Kill a Mockingbird",
-                Author = "Harper Lee",
-                Publisher = "HarperCollins",
-                ISBN = "978-0061120084",
-                Category = "Fiction",
-                PageCount = 336,
-                Price = 14.99m
-            },
-            new WebApplication4.Models.Book
-            {
-                Title = "1984",
-                Author = "George Orwell",
-                Publisher = "Signet Classic",
-                ISBN = "978-0451524935",
-                Category = "Science Fiction",
-                PageCount = 328,
-                Price = 9.99m
-            },
-            new WebApplication4.Models.Book
-            {
-                Title = "The Hobbit",
-                Author = "J.R.R. Tolkien",
-                Publisher = "Houghton Mifflin",
-                ISBN = "978-0547928227",
-                Category = "Fantasy",
-                PageCount = 320,
-                Price = 13.99m
-            },
-            new WebApplication4.Models.Book
-            {
-                Title = "Pride and Prejudice",
-                Author = "Jane Austen",
-                Publisher = "Penguin Classics",
-                ISBN = "978-0141439518",
-                Category = "Romance",
-                PageCount = 480,
-                Price = 8.99m
-            }
-        );
-        
-        // Save changes to the database
-        context.SaveChanges();
-    }
 }
+
+// Configure the SPA
+app.UseSpa(spa =>
+{
+    spa.Options.SourcePath = "bookstore-client";
+
+    if (app.Environment.IsDevelopment())
+    {
+        // Start the React development server
+        spa.UseReactDevelopmentServer(npmScript: "start");
+        
+        // Open browser automatically
+        var url = "http://localhost:3000";
+        try
+        {
+            // Open browser based on OS
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                Process.Start(new ProcessStartInfo("cmd", $"/c start {url}") { CreateNoWindow = true });
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                Process.Start("xdg-open", url);
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            {
+                Process.Start("open", url);
+            }
+        }
+        catch
+        {
+            // Ignore any errors when trying to open the browser
+        }
+    }
+});
 
 app.Run();

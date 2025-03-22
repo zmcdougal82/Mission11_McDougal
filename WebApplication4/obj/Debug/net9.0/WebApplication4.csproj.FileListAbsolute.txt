@@ -224,4 +224,6 @@
 /Users/zackmcdougal/RiderProjects/WebApplication4/WebApplication4/bin/Debug/net9.0/bookstore-client/tsconfig.json
 /Users/zackmcdougal/RiderProjects/WebApplication4/WebApplication4/bin/Debug/net9.0/package-lock.json
 /Users/zackmcdougal/RiderProjects/WebApplication4/WebApplication4/bin/Debug/net9.0/package.json
+/Users/zackmcdougal/RiderProjects/WebApplication4/WebApplication4/obj/Debug/net9.0/WebApplication4.sourcelink.json
+/Users/zackmcdougal/RiderProjects/WebApplication4/WebApplication4/bin/Debug/net9.0/Microsoft.AspNetCore.SpaServices.Extensions.dll
 /Users/zackmcdougal/RiderProjects/WebApplication4/WebApplication4/bin/Debug/net9.0/System.Text.Json.dll
