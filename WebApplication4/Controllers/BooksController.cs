@@ -16,12 +16,32 @@ namespace WebApplication4.Controllers
             _context = context;
         }
 
+        // GET: api/books/categories
+        // Returns all unique categories for filtering
+        [HttpGet("categories")]
+        public async Task<IActionResult> GetCategories()
+        {
+            var categories = await _context.Books
+                .Select(b => b.Category)
+                .Distinct()
+                .OrderBy(c => c)
+                .ToListAsync();
+            
+            return Ok(categories);
+        }
+        
         // GET: api/Books
-        // Query parameters: page (default=1), pageSize (default=5), sortField, sortOrder (asc/desc)
+        // Query parameters: page (default=1), pageSize (default=5), sortField, sortOrder (asc/desc), category (optional)
         [HttpGet]
-        public async Task<IActionResult> GetBooks(int page = 1, int pageSize = 5, string sortField = "Title", string sortOrder = "asc")
+        public async Task<IActionResult> GetBooks(int page = 1, int pageSize = 5, string sortField = "Title", string sortOrder = "asc", string? category = null)
         {
             var query = _context.Books.AsQueryable();
+            
+            // Apply category filter if provided
+            if (!string.IsNullOrEmpty(category) && category != "All")
+            {
+                query = query.Where(b => b.Category == category);
+            }
 
             // Apply sorting based on the sortField parameter
             switch (sortField.ToLower())
